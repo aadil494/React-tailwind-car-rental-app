@@ -1,12 +1,13 @@
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { Marginer } from "../marginer";
 import { Button } from "../button";
 
-
+import Calendar from "react-calendar";
+import  "react-calendar/dist/Calendar.css";
 
 const CardContainer = styled.div`
 box-shadow: 0 1.3px 12px -3px rgba(0,0,0,0.4);
@@ -33,6 +34,7 @@ ${tw`
 const ItemContainer = styled.div`
     ${tw`
         flex 
+        relative
     `};
 `;
 
@@ -54,6 +56,8 @@ const Name = styled.span`
         text-gray-600 
         text-xs 
         md:text-sm 
+        cursor-pointer 
+
     `};
 `;
 
@@ -69,13 +73,28 @@ const LineSeperator = styled.span`
     `};
 `;
 
+
+const DateCalendar = styled(Calendar)`
+    position:absolute;
+    max-width:none;
+    top: 2.8em;
+    left:-1.3em;
+`
+
 export function BookCard(){
+
+    const [startDate, setStartDate] = useState();
+    const [isStartCalendarOpen, setStartCalendarOpen] = useState(false);
+    const toggleStartDateCalendar = () =>{
+        setStartCalendarOpen(!isStartCalendarOpen);
+    }
     return <CardContainer>
         <ItemContainer>
             <Icon>
                 <FontAwesomeIcon icon={faCalendarAlt} />
             </Icon>
-            <Name>Pick Up date</Name>
+            <Name onClick={toggleStartDateCalendar}>Pick Up date</Name>
+            {isStartCalendarOpen && <DateCalendar/> }
         </ItemContainer>
         <LineSeperator />
         <ItemContainer>
