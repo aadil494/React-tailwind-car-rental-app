@@ -85,23 +85,36 @@ export function BookCard(){
 
     const [startDate, setStartDate] = useState();
     const [isStartCalendarOpen, setStartCalendarOpen] = useState(false);
+    
+    const [returnDate, setReturnDate] = useState();
+    const [isReturnCalendarOpen, setReturnCalendarOpen] = useState(false);
+    
+    
     const toggleStartDateCalendar = () =>{
         setStartCalendarOpen(!isStartCalendarOpen);
+        if(isReturnCalendarOpen) setReturnCalendarOpen(false);
     }
+
+    const toggleReturnDateCalendar = () =>{
+        setReturnCalendarOpen(!isReturnCalendarOpen);
+        if(isStartCalendarOpen) setStartCalendarOpen(false);
+    }
+
     return <CardContainer>
         <ItemContainer>
             <Icon>
                 <FontAwesomeIcon icon={faCalendarAlt} />
             </Icon>
             <Name onClick={toggleStartDateCalendar}>Pick Up date</Name>
-            {isStartCalendarOpen && <DateCalendar/> }
+            {isStartCalendarOpen && <DateCalendar value={startDate} onChange={setStartDate as any} /> }
         </ItemContainer>
         <LineSeperator />
         <ItemContainer>
             <Icon>
                 <FontAwesomeIcon icon={faCalendarAlt} />
             </Icon>
-            <Name>Return Date</Name>
+            <Name onClick={toggleReturnDateCalendar}>Return Date</Name>
+            {isReturnCalendarOpen && <DateCalendar  value={returnDate} onChange={setReturnDate as any} /> }
         </ItemContainer>
         <Marginer direction="horizontal" margin="2em" />
         <Button text="Book Your Ride" />
