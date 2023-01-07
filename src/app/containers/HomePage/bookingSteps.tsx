@@ -20,8 +20,8 @@ const Container = styled.div`
 
 const Title = styled.h2`
     ${tw`
-        text-xl 
-        lg:text-4xl 
+        text-4xl 
+        lg:text-5xl 
         text-black 
         font-extrabold 
 
@@ -44,7 +44,7 @@ const StepContainer = styled.div`
     ${tw`
         flex 
         flex-col 
-        w-16 
+        m-3
         md:w-96 
         items-center 
         transition-colors 
